@@ -1,0 +1,173 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/post" method="POST">
+	<h1>Welcome to the project {{email}} :) </h1> 
+	<input type="text" name = "ContentItem" placeholder="post" required/> </br>
+	
+	Public: 
+	Yes<input type="radio" name = "is_pub" value = "1" />
+	No<input type="radio" name = "is_pub" value = "0" checked/>
+
+	<input type="submit" value = ContentItem />
+</form>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+Here are public posts:
+
+<table>
+	<th>Item ID</th>
+	<th>Email</th>
+	<th>Time</th>
+	<th> File Path</th>
+	<th> Item Name</th>
+
+
+{% for line in data %}
+	<tr>
+		<form action="/show_posts" method="POST">
+		<td><input type="submit" name ="post" value = "{{line.item_id}}" /></td>
+		</form>
+		<td>{{line.email_post}}</td>
+		<td>{{line.post_time}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.item_name}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+
+Here are posts shared with your groups:
+
+<table>
+	<th>Item ID</th>
+	<th>Email</th>
+	<th>Time</th>
+	<th> File Path</th>
+	<th> Item Name</th>
+
+
+{% for line in share %}
+	<tr>
+		<form action="/show_posts" method="POST">
+		<td><input type="submit" name ="post" value = "{{line.item_id}}" /></td>
+		</form>
+		<td>{{line.email_post}}</td>
+		<td>{{line.post_time}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.item_name}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+
+Here are priavte posts:
+
+<table>
+	<th>Item ID</th>
+	<th>Email</th>
+	<th>Time</th>
+	<th> File Path</th>
+	<th> Item Name</th>
+
+
+{% for line in priv %}
+	<tr>
+		<form action="/show_posts" method="POST">
+		<td><input type="submit" name ="post" value = "{{line.item_id}}" /></td>
+		</form>
+		<td>{{line.email_post}}</td>
+		<td>{{line.post_time}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.item_name}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+Here are your tags:
+<table>
+  <th>Item ID</th>
+	<th>Tagger</th>
+	<th>Approve or Decline Tag</th>
+
+{% for line in tags %}
+	<tr>
+    <form action="/tag_app" method="POST">
+		<td><input type = 'hidden' name ="item" value ="{{line.item_id}}">{{line.item_id}}</input></td>
+		<td>{{line.email_tagger}}</td>
+		<td>Approve:<input type="radio" name = "tag" value = "1" />
+    Decline:<input type="radio" name = "tag" value = "0" />
+    <input type="submit" value = Submit /></td>
+  	</form>
+	</tr>
+{% endfor %}
+</table>
+
+<!-- <a href="/select_blogger">Select a blogger</a>
+<br>
+<a href="/logout">Logout</a>
+
+
+Public: Yes<input type="radio" name = "public" value = "1" />
+	 No<input type="radio" name = "public" value = "0" checked/>
+
+	 <input type="text" name = "is_pub" placeholder="public?" required/> </br>
+
+-->
+
+Create Friend Group:
+
+<form action="/create_group" method="POST">
+	<input type="text" name = "name" placeholder="friend group name" required/> </br>
+	<input type="text" name = "description" placeholder="description" required/></br>
+	<input type="submit" value = Create />
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+
+</body>
+
+Invite Friends to your Group: 
+<form action="/mem_inv" method="POST">
+	<input type="text" name="FG" placeholder="Group Name" />
+	<input type="text" name="fname" placeholder="First Name" />
+	<input type="text" name="lname" placeholder="Last Name" />
+	<br>
+	<input type = "submit" value="Invite to group">
+</form>
+<br>
+
+Here are your group invites:
+<table>
+  <th>Owner</th>
+	<th>Name</th>
+	<th>Approve or Decline Group Invite</th>
+
+{% for line in invs %}
+	<tr>
+    <form action="/mem_app" method="POST">
+		<td><input type = 'hidden' name ="item" value ="{{line.owner_email}}">{{line.owner_email}}</input></td>
+		<td>{{line.fg_name}}</td>
+		<td>Approve:<input type="radio" name = "app" value = "1" />
+    Decline:<input type="radio" name = "app" value = "0" />
+    <input type="submit" value = Submit /></td>
+  	</form>
+	</tr>
+{% endfor %}
+</table>
+
+
+<!-- <a href='create_group'>Click here to manage Friend Groups</a>
+ -->
+
+<br>
+
+<a href="/logout">Logout</a>
+</html>

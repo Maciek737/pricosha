@@ -1,0 +1,105 @@
+<html>
+<head>
+</head>
+<body>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+Here is the post:
+
+<table>
+	<th>Item ID</th>
+	<th>Email</th>
+	<th>Time</th>
+	<th> File Path</th>
+	<th> Item Name</th>
+
+{% for line in post %}
+	<tr>
+		<td>{{line.item_id}}</td>
+		<td>{{line.email_post}}</td>
+		<td>{{line.post_time}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.item_name}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+Rated count is {{rates|length}}
+
+
+<form action="/tag" method="POST">
+	:)<input type="radio" name="emoji" value="1">
+	:(<input type="radio" name="emoji" value="2">
+	:|<input type="radio" name="emoji" value="3">
+	<3<input type="radio" name="emoji" value="4">
+	<input type="submit" value = "Rate" /> - Not needed for implementation and does not work.
+<br>
+<br>
+
+Here are people tagged in the post:
+
+<table>
+	<th>Item ID</th>
+	<th>First Name</th>
+	<th>Last Name</th>
+
+{% for line in tagged %}
+	<tr>
+		<td>{{line.item_id}}</td>
+		<td>{{line.fname}}</td>
+		<td>{{line.lname}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+<br>
+<form action="/tag" method="POST">
+	<input type="text" name="tagged" placeholder="Tag" /> </br>
+	<input type="submit" value = "Tag a friend email" />
+</form>
+<br>
+
+
+
+<br>
+
+<form action="/share" method="POST">
+	<!-- {% for line in group %}
+	{{line.fg_name}}:<input type = "radio" name = "FGTag" value = {{line.fg_name}}><input type = "hidden" name = "FGOwn" value = {{line.owner_email}}></input></input>
+	{% endfor %} -->
+	<input type="text" name="FGTag" placeholder="Group Name" />
+	<input type="text" name="FGOwn" placeholder="Group Owner Email" />
+	<br>
+	<input type = "submit" value="Share with a Friend Group">
+</form>
+<br>
+
+
+
+
+
+
+<!-- <br>
+<br>
+<a href="/select_blogger">Select another blogger</a>
+<br>
+<br>
+<a href="/home">Post a message</a>
+<br>
+<br> -->
+<a href="/logout">Logout</a>
+
+</body>
+
+
+</html>

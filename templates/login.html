@@ -1,0 +1,43 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/loginAuth" method="POST">
+	<input type="text" name = "email" placeholder="email" required/> </br>
+	<input type="password" name = "password" placeholder="password" required/></br>
+	<input type="submit" value = Login />
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+
+<a href="/">Go back</a>
+
+</body>
+
+<br>
+
+</style>
+
+Here are public posts:
+
+<table>
+	<th>Item ID</th>
+	<th>Email</th>
+	<th>Time</th>
+	<th> File Path</th>
+	<th> Item Name</th>
+
+
+{% for line in data %}
+	<tr>
+		<td>{{line.item_id}}</td>
+		<td>{{line.email_post}}</td>
+		<td>{{line.post_time}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.item_name}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+</html>
