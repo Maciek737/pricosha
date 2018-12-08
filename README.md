@@ -9,3 +9,6 @@
 7. Add friend - Users can add firends to to their own groups.
 
 Other stuff added too. This is held together with duct tape
+
+
+test.py is the file to run. One change was made to the data base definitions.
